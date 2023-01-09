@@ -1,38 +1,62 @@
 {
-  "name": "nextjs-toolbox",
-  "version": "1.0.0",
-  "author": "",
-  "bugs": {
-    "url": "https://github.com/netlify-templates/nextjs-toolbox/issues"
-  },
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "export": "next export",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@clerk/nextjs": "^4.5.1",
-    "cypress": "^10.0.3",
-    "next": "12.3.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-test-renderer": "^18.2.0",
-    "typescript": "^4.9.4"
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.4.12",
-    "eslint": "8.24.0",
-    "eslint-config-next": "12.3.1",
-    "netlify-plugin-cypress": "2.2.0",
-    "postcss": "^8.4.17",
-    "tailwindcss": "^3.1.8"
-  },
-  "pnpm": {
-    "overrides": {
-      "got@<11.8.5": ">=11.8.5",
-      "jsonwebtoken@<=8.5.1": ">=9.0.0"
+    "name": "destack-workspace",
+    "version": "1.0.0",
+    "workspaces": [
+        "./lib/*",
+        "./dev/*"
+    ],
+    "scripts": {
+        "start": "npm run start:next",
+        "start:next": "cd dev/nextjs-project && npm start",
+        "dev": "npm run dev:next",
+        "dev:next": "concurrently -k \"cd lib/destack && npm run dev\" \"cd dev/nextjs-project && npm run dev\"",
+        "build": "npm run build:next",
+        "build:next": "cd lib/destack && npm run build && cd ../../dev/nextjs-project && npm run build",
+        "test": "jest --runInBand",
+        "export": "cd lib/destack && npm run export",
+        "publish": "cd lib/destack && npm publish",
+        "publish:alpha": "cd lib/destack && npm run publish:alpha",
+        "publish:beta": "cd lib/destack && npm run publish:beta",
+        "prepare": "husky install"
+    },
+    "dependencies": {
+        "@clerk/nextjs": "^4.5.1",
+        "@types/node": "^18.11.18",
+        "cypress": "^10.0.3",
+        "next": "12.3.1",
+        "react": "18.2.0",
+        "react-dom": "18.2.0",
+        "react-test-renderer": "^18.2.0"
+    },
+    "devDependencies": {
+        "@types/react": "18.0.26",
+        "@typescript-eslint/eslint-plugin": "^4.25.0",
+        "@typescript-eslint/parser": "^4.25.0",
+        "autoprefixer": "^10.4.12",
+        "concurrently": "^6.2.0",
+        "eslint": "8.24.0",
+        "eslint-config-next": "12.3.1",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-prettier": "^3.4.0",
+        "eslint-plugin-react": "^7.23.2",
+        "eslint-plugin-react-hooks": "^4.2.0",
+        "husky": "^6.0.0",
+        "jest": "^27.0.3",
+        "jest-puppeteer": "^5.0.4",
+        "lint-staged": "^11.0.0",
+        "netlify-plugin-cypress": "2.2.0",
+        "postcss": "^8.4.17",
+        "prettier": "^2.3.0",
+        "pretty-quick": "^3.1.0",
+        "puppeteer": "^9.1.1",
+        "tailwindcss": "^3.1.8",
+        "ts-node-dev": "^2.0.0",
+        "typescript": "^4.3.2"
+    },
+    "lint-staged": {
+        "*.{js,ts,tsx,jsx}": [
+            "pretty-quick --staged",
+            "tsc --noEmit"
+        ]
     }
-  }
 }
