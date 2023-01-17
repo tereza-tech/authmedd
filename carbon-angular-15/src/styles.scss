@@ -1,0 +1,5 @@
+/* To use own fonts replace font path as followed:
+    $font-path: '/assets/fonts/';
+*/
+$font-path: '~carbon-components/src/globals/fonts';
+@import './../node_modules/carbon-components/css/carbon-components.css';

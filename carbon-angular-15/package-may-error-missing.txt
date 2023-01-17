@@ -1,0 +1,9 @@
+
+codalyzer
+jasmine-spec-reporter
+karma-cli
+karma-coverage-istanbul-reporter
+sass
+postcss-loader
+protractor
+tslint
